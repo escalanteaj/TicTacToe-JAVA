@@ -6,110 +6,74 @@ import javax.swing.ImageIcon;
 
 public class Player {
 
+	/**
+	 * Attributes: Player name. Player's current turn. X and O .png images.
+	 */
 	private String playerName = "";
-	private boolean didIStart = false;
 	private boolean myTurn = false;
-	private byte turnNumber = 0;
-	private final byte MAX_TURNS = 5;
-	private Image xPlayerIcon = new ImageIcon(this.getClass().getResource("/equis.png")).getImage();
-	private Image oPlayerIcon = new ImageIcon(this.getClass().getResource("/circle.png")).getImage();
+	private Image xPlayerIcon = new ImageIcon(this.getClass().getResource("/xIcon.png")).getImage();
+	private Image oPlayerIcon = new ImageIcon(this.getClass().getResource("/oIcon.png")).getImage();
 
 	/**
-	 *
+	 * Default constructor.
 	 */
 	public Player() {
 		super();
 	}
 
 	/**
-	 * @return the playerName
+	 * @return Returns the player name.
 	 */
 	public String getPlayerName() {
 		return playerName;
 	}
 
 	/**
-	 * @param playerName the playerName to set
+	 * @param Sets the player name.
 	 */
 	public void setPlayerName(String playerName) {
 		this.playerName = playerName;
 	}
 
 	/**
-	 * @return the didIStart
-	 */
-	public boolean isDidIStart() {
-		return didIStart;
-	}
-
-	/**
-	 * @param didIStart the didIStart to set
-	 */
-	public void setDidIStart(boolean didIStart) {
-		this.didIStart = didIStart;
-	}
-
-	/**
-	 * @return the myTurn
+	 * @return Returns true if it is the player's current turn.
 	 */
 	public boolean isMyTurn() {
 		return myTurn;
 	}
 
 	/**
-	 * @param myTurn the myTurn to set
+	 * @param Sets the player's current turn.
 	 */
 	public void setMyTurn(boolean myTurn) {
 		this.myTurn = myTurn;
 	}
 
 	/**
-	 * @return the turnNumber
-	 */
-	public byte getTurnNumber() {
-		return turnNumber;
-	}
-
-	/**
-	 * @param turnNumber the turnNumber to set
-	 */
-	public void setTurnNumber(byte turnNumber) {
-		this.turnNumber = turnNumber;
-	}
-
-	/**
-	 * @return the xPlayerIcon
+	 * @return Returns the player's X icon.
 	 */
 	public Image getXPlayerIcon() {
 		return xPlayerIcon;
 	}
 
 	/**
-	 * @param xPlayerIcon the xPlayerIcon to set
+	 * @param Sets the player's X icon.
 	 */
 	public void setXPlayerIcon(Image xPlayerIcon) {
 		this.xPlayerIcon = xPlayerIcon;
 	}
 
 	/**
-	 * @return the oPlayerIcon
+	 * @return Returns the player's O icon.
 	 */
 	public Image getOPlayerIcon() {
 		return oPlayerIcon;
 	}
 
 	/**
-	 * @param oPlayerIcon the oPlayerIcon to set
+	 * @param Sets the player's O icon.
 	 */
 	public void setOPlayerIcon(Image oPlayerIcon) {
 		this.oPlayerIcon = oPlayerIcon;
 	}
-
-	/**
-	 * @return the mAX_TURNS
-	 */
-	public byte getMAX_TURNS() {
-		return MAX_TURNS;
-	}
-
 }

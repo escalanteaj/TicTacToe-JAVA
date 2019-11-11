@@ -19,6 +19,9 @@ import javax.swing.border.LineBorder;
 
 public class TicTacToeNewVersion {
 
+	/**
+	 * GUI Frame, Panels and Buttons.
+	 */
 	private JFrame ticTacToeFrame;
 	private JPanel boardPanel;
 	private JPanel resultsPanel;
@@ -34,18 +37,25 @@ public class TicTacToeNewVersion {
 	private JButton bottomLButton;
 	private JButton bottomCButton;
 	private JButton bottomRButton;
-	private JButton resetButton;
-	private JButton checkButton;
+	private JButton newGameButton;
+
+	/**
+	 * turnsCount keeps track of the overall count of turns played. winner displays
+	 * the name of the winning player.
+	 */
 	private int turnsCount = 0;
 	private String winner = "";
 
+	/**
+	 * Creates both players and sets their respective icon (X or O).
+	 */
 	Player playerX = new Player();
 	Player playerO = new Player();
 	Image playerXIcon = playerX.getXPlayerIcon();
 	Image playerOIcon = playerO.getOPlayerIcon();
 
 	/**
-	 * Launch the application.
+	 * Launches the application.
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -61,7 +71,7 @@ public class TicTacToeNewVersion {
 	}
 
 	/**
-	 * Create the application.
+	 * Creates the application.
 	 */
 	public TicTacToeNewVersion() {
 		initialize();
@@ -106,6 +116,9 @@ public class TicTacToeNewVersion {
 		playerX.setPlayerName("X");
 		playerO.setPlayerName("O");
 
+		/**
+		 * Creates the listeners for the 9 playable buttons.
+		 */
 		topLButton = new JButton();
 		topLButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -259,27 +272,28 @@ public class TicTacToeNewVersion {
 		bottomRButton.setPreferredSize(new Dimension(70, 70));
 		boardPanel.add(bottomRButton);
 
-		resetButton = new JButton("Reset");
-		resetButton.addActionListener(new ActionListener() {
+		/**
+		 * Creates the listener for the New Game button.
+		 */
+		newGameButton = new JButton("New Game");
+		newGameButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				resetGame();
 			}
 		});
-		resetButton.setBounds(185, 7, 89, 23);
-		resultsPanel.add(resetButton);
-
-		checkButton = new JButton("Check");
-		checkButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				gameLogic();
-			}
-		});
-		checkButton.setBounds(185, 41, 89, 23);
-		resultsPanel.add(checkButton);
+		newGameButton.setBounds(144, 7, 130, 23);
+		resultsPanel.add(newGameButton);
 
 	}
 
+	/**
+	 * Creates the logic for the Tic Tac Toe game.
+	 */
 	protected void gameLogic() {
+
+		/**
+		 * Checks if there is a Top Row Winner.
+		 */
 		if (topLButton.isEnabled() == false && topCButton.isEnabled() == false && topRButton.isEnabled() == false) {
 			if (topLButton.getIcon().toString().equals(topCButton.getIcon().toString())
 					&& topCButton.getIcon().toString() == topRButton.getIcon().toString()) {
@@ -287,6 +301,10 @@ public class TicTacToeNewVersion {
 				gameResultLabel.setText("Game ended. The winner is: " + topLButton.getIcon().toString());
 			}
 		}
+
+		/**
+		 * Checks if there is a Middle Row Winner.
+		 */
 		if (middleLButton.isEnabled() == false && middleCButton.isEnabled() == false
 				&& middleRButton.isEnabled() == false) {
 			if (middleLButton.getIcon().toString().equals(middleCButton.getIcon().toString())
@@ -295,6 +313,10 @@ public class TicTacToeNewVersion {
 				gameResultLabel.setText("Game ended. The winner is: " + middleLButton.getIcon().toString());
 			}
 		}
+
+		/**
+		 * Checks if there is a Bottom Row Winner.
+		 */
 		if (bottomLButton.isEnabled() == false && bottomCButton.isEnabled() == false
 				&& bottomRButton.isEnabled() == false) {
 			if (bottomLButton.getIcon().toString().equals(bottomCButton.getIcon().toString())
@@ -303,6 +325,10 @@ public class TicTacToeNewVersion {
 				gameResultLabel.setText("Game ended. The winner is: " + bottomLButton.getIcon().toString());
 			}
 		}
+
+		/**
+		 * Checks if there is a Left Column Winner.
+		 */
 		if (topLButton.isEnabled() == false && middleLButton.isEnabled() == false
 				&& bottomLButton.isEnabled() == false) {
 			if (topLButton.getIcon().toString().equals(middleLButton.getIcon().toString())
@@ -311,6 +337,10 @@ public class TicTacToeNewVersion {
 				gameResultLabel.setText("Game ended. The winner is: " + topLButton.getIcon().toString());
 			}
 		}
+
+		/**
+		 * Checks if there is a Center Column Winner.
+		 */
 		if (topCButton.isEnabled() == false && middleCButton.isEnabled() == false
 				&& bottomCButton.isEnabled() == false) {
 			if (topCButton.getIcon().toString().equals(middleCButton.getIcon().toString())
@@ -319,6 +349,10 @@ public class TicTacToeNewVersion {
 				gameResultLabel.setText("Game ended. The winner is: " + topCButton.getIcon().toString());
 			}
 		}
+
+		/**
+		 * Checks if there is a Right Column Winner.
+		 */
 		if (topRButton.isEnabled() == false && middleRButton.isEnabled() == false
 				&& bottomRButton.isEnabled() == false) {
 			if (topRButton.getIcon().toString().equals(middleRButton.getIcon().toString())
@@ -328,6 +362,9 @@ public class TicTacToeNewVersion {
 			}
 		}
 
+		/**
+		 * Checks if there is a Forward Diagonal "\" Winner.
+		 */
 		if (topLButton.isEnabled() == false && middleCButton.isEnabled() == false
 				&& bottomRButton.isEnabled() == false) {
 			if (topLButton.getIcon().toString().equals(middleCButton.getIcon().toString())
@@ -337,6 +374,9 @@ public class TicTacToeNewVersion {
 			}
 		}
 
+		/**
+		 * Checks if there is a Backward Diagonal "/" Winner.
+		 */
 		if (topRButton.isEnabled() == false && middleCButton.isEnabled() == false
 				&& bottomLButton.isEnabled() == false) {
 			if (topRButton.getIcon().toString().equals(middleCButton.getIcon().toString())
@@ -346,6 +386,9 @@ public class TicTacToeNewVersion {
 			}
 		}
 
+		/**
+		 * Displays the winning tiles if found.
+		 */
 		switch (winner) {
 		case "topRow":
 			topRowWinner();
@@ -386,6 +429,12 @@ public class TicTacToeNewVersion {
 
 	}
 
+	/**
+	 * Alternate turns between players. It's also carried on after each game
+	 * finishes so, either, the person who started second in the previous game has
+	 * the chance to start the current game or the loser of the previous game has
+	 * the chance to start the current game.
+	 */
 	public void alternatePlayers() {
 		if (currentPlayerLabel.getText() == "X") {
 			playerX.setMyTurn(true);
@@ -398,12 +447,9 @@ public class TicTacToeNewVersion {
 		}
 	}
 
-	public void gameEnded() {
-		if (turnsCount == 9) {
-			gameResultLabel.setText("Game ended. The winner is: ");
-		}
-	}
-
+	/**
+	 * Resets the game to the starting state.
+	 */
 	public void resetGame() {
 		topLButton.setEnabled(true);
 		topLButton.setIcon(null);
@@ -425,10 +471,13 @@ public class TicTacToeNewVersion {
 		bottomRButton.setIcon(null);
 		turnsCount = 0;
 		gameResultLabel.setText(null);
-		checkButton.setEnabled(true);
 		winner = "";
 	}
 
+	/**
+	 * If there are winning tiles in the Top Row, it will display them and lock the
+	 * other tiles, ending the game.
+	 */
 	public void topRowWinner() {
 		topLButton.setEnabled(true);
 		topCButton.setEnabled(true);
@@ -439,9 +488,12 @@ public class TicTacToeNewVersion {
 		bottomLButton.setEnabled(false);
 		bottomCButton.setEnabled(false);
 		bottomRButton.setEnabled(false);
-		checkButton.setEnabled(false);
 	}
 
+	/**
+	 * If there are winning tiles in the Middle Row, it will display them and lock the
+	 * other tiles, ending the game.
+	 */
 	public void middleRowWinner() {
 		topLButton.setEnabled(false);
 		topCButton.setEnabled(false);
@@ -452,9 +504,12 @@ public class TicTacToeNewVersion {
 		bottomLButton.setEnabled(false);
 		bottomCButton.setEnabled(false);
 		bottomRButton.setEnabled(false);
-		checkButton.setEnabled(false);
 	}
 
+	/**
+	 * If there are winning tiles in the Bottom Row, it will display them and lock the
+	 * other tiles, ending the game.
+	 */
 	public void bottomRowWinner() {
 		topLButton.setEnabled(false);
 		topCButton.setEnabled(false);
@@ -465,9 +520,12 @@ public class TicTacToeNewVersion {
 		bottomLButton.setEnabled(true);
 		bottomCButton.setEnabled(true);
 		bottomRButton.setEnabled(true);
-		checkButton.setEnabled(false);
 	}
 
+	/**
+	 * If there are winning tiles in the Left Column, it will display them and lock the
+	 * other tiles, ending the game.
+	 */
 	public void leftColWinner() {
 		topLButton.setEnabled(true);
 		topCButton.setEnabled(false);
@@ -478,9 +536,12 @@ public class TicTacToeNewVersion {
 		bottomLButton.setEnabled(true);
 		bottomCButton.setEnabled(false);
 		bottomRButton.setEnabled(false);
-		checkButton.setEnabled(false);
 	}
 
+	/**
+	 * If there are winning tiles in the Center Column, it will display them and lock the
+	 * other tiles, ending the game.
+	 */
 	public void centerColWinner() {
 		topLButton.setEnabled(false);
 		topCButton.setEnabled(true);
@@ -491,9 +552,12 @@ public class TicTacToeNewVersion {
 		bottomLButton.setEnabled(false);
 		bottomCButton.setEnabled(true);
 		bottomRButton.setEnabled(false);
-		checkButton.setEnabled(false);
 	}
 
+	/**
+	 * If there are winning tiles in the Rigth Column, it will display them and lock the
+	 * other tiles, ending the game.
+	 */
 	public void rightColWinner() {
 		topLButton.setEnabled(false);
 		topCButton.setEnabled(false);
@@ -504,9 +568,12 @@ public class TicTacToeNewVersion {
 		bottomLButton.setEnabled(false);
 		bottomCButton.setEnabled(false);
 		bottomRButton.setEnabled(true);
-		checkButton.setEnabled(false);
 	}
 
+	/**
+	 * If there are winning tiles in the Forward Diagonal, it will display them and lock the
+	 * other tiles, ending the game.
+	 */
 	public void forwardDiagonalWinner() {
 		topLButton.setEnabled(true);
 		topCButton.setEnabled(false);
@@ -517,9 +584,12 @@ public class TicTacToeNewVersion {
 		bottomLButton.setEnabled(false);
 		bottomCButton.setEnabled(false);
 		bottomRButton.setEnabled(true);
-		checkButton.setEnabled(false);
 	}
 
+	/**
+	 * If there are winning tiles in the Backward Diagonal, it will display them and lock the
+	 * other tiles, ending the game.
+	 */
 	public void backwardDiagonalWinner() {
 		topLButton.setEnabled(false);
 		topCButton.setEnabled(false);
@@ -530,14 +600,14 @@ public class TicTacToeNewVersion {
 		bottomLButton.setEnabled(true);
 		bottomCButton.setEnabled(false);
 		bottomRButton.setEnabled(false);
-		checkButton.setEnabled(false);
 	}
 
+	/**
+	 * If there are no winners after the board is full, a message will be displayed.
+	 */
 	public void noWinner() {
 		if (turnsCount == 9) {
 			gameResultLabel.setText("There are no winners.");
-			checkButton.setEnabled(false);
 		}
 	}
-
 }
